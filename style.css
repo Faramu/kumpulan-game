@@ -1,0 +1,250 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Press Start 2P', cursive;
+    background-color: #2c2c2c; /* Outer background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.game-container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(to bottom, #4cb0db 0%, #76c6df 40%, #a2d7de 60%, #c4e9e4 100%);
+    overflow: hidden;
+    image-rendering: pixelated;
+}
+
+/* Background elements styling */
+.ground-wrapper {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 100px;
+    z-index: 2;
+}
+
+.grass {
+    height: 15px;
+    background-color: #84ca66; /* bright green */
+    border-top: 4px solid #a8e57f; /* top highlight */
+    border-bottom: 4px solid #5d9841; /* shadow */
+}
+
+.dirt {
+    height: 85px;
+    background-color: #6d424b;
+    position: relative;
+}
+
+/* Create some noise/texture for dirt using background dots */
+.dirt::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image: radial-gradient(#5a343b 15%, transparent 16%), radial-gradient(#824c57 15%, transparent 16%);
+    background-size: 20px 20px;
+    background-position: 0 0, 10px 10px;
+    opacity: 0.5;
+}
+
+/* Basic CSS Trees (Blocky) */
+.trees {
+    position: absolute;
+    bottom: 100px; /* Above ground */
+    left: 40px;
+    display: flex;
+    gap: 20px;
+    align-items: flex-end;
+    z-index: 1;
+}
+
+.tree {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.tree-leaves {
+    width: 0;
+    height: 0;
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-bottom: 30px solid #7bcf87;
+    position: relative;
+}
+.tree-leaves::before {
+    content: '';
+    position: absolute;
+    top: 30px;
+    left: -30px;
+    border-left: 30px solid transparent;
+    border-right: 30px solid transparent;
+    border-bottom: 40px solid #7bcf87;
+}
+
+.tree-trunk {
+    width: 10px;
+    height: 20px;
+    background-color: #7bcf87; /* Wait, the image tree trunk is also green, looks like it's all one color block */
+    margin-top: 40px;
+}
+
+/* Menu */
+.menu {
+    position: absolute;
+    top: 8%;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    z-index: 10;
+}
+
+.pixel-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    color: #fb9e31; /* Orange text */
+    text-shadow: 2px 2px 0px #211108, -2px -2px 0px #211108, 2px -2px 0px #211108, -2px 2px 0px #211108; /* Black outline */
+    font-size: 16px;
+    height: 50px;
+    width: 250px;
+    background-color: #d3996f;
+    border: none;
+    
+    /* Wood borders and highlights */
+    box-shadow: 
+        inset 0 4px 0 #ebb999, /* Top edge highlight */
+        inset 0 -4px 0 #a16441, /* Bottom edge shadow */
+        inset 4px 0 0 #ebb999, /* Left edge highlight */
+        inset -4px 0 0 #a16441, /* Right edge shadow */
+        0 -4px 0 0 #211108, /* Outer top border */
+        0 4px 0 0 #211108, /* Outer bottom border */
+        -4px 0 0 0 #211108, /* Outer left border */
+        4px 0 0 0 #211108, /* Outer right border */
+        0 8px 0 0 rgba(0,0,0,0.2); /* Drop shadow */
+        
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: transform 0.1s;
+    
+    /* Pixelated corners fix */
+    margin: 4px;
+    position: relative;
+}
+
+/* Fake missing corners for true pixel block look */
+.pixel-btn::before, .pixel-btn::after {
+    content: '';
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background-color: #211108;
+}
+.pixel-btn::before {
+    top: -4px; left: -4px;
+    box-shadow: calc(250px + 4px) 0 0 #211108; /* Top right corner */
+}
+.pixel-btn::after {
+    bottom: -4px; left: -4px;
+    box-shadow: calc(250px + 4px) 0 0 #211108; /* Bottom right corner */
+}
+
+
+.pixel-btn:hover {
+    background-color: #ebb999;
+    color: #ffd859;
+}
+
+.pixel-btn:active {
+    transform: translateY(4px);
+    box-shadow: 
+        inset 0 2px 0 #ebb999,
+        inset 0 -2px 0 #a16441,
+        inset 2px 0 0 #ebb999,
+        inset -2px 0 0 #a16441,
+        0 -4px 0 0 #211108,
+        0 4px 0 0 #211108,
+        -4px 0 0 0 #211108,
+        4px 0 0 0 #211108;
+}
+
+/* Signpost */
+.signpost {
+    position: absolute;
+    bottom: 100px;
+    right: 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 10;
+}
+
+.sign-board {
+    background-color: #c48153;
+    padding: 6px 12px;
+    color: #a82e2e;
+    font-size: 14px;
+    font-weight: bold;
+    box-shadow: 
+        inset 0 3px 0 #e4a275, 
+        inset 0 -3px 0 #8d4f2b,
+        0 -3px 0 0 #211108,
+        0 3px 0 0 #211108,
+        -3px 0 0 0 #211108,
+        3px 0 0 0 #211108;
+    margin-bottom: 3px;
+}
+
+.sign-pole {
+    width: 10px;
+    height: 25px;
+    background-color: #8d4f2b;
+    border-left: 3px solid #c48153;
+    box-shadow: 
+        -3px 0 0 0 #211108,
+        3px 0 0 0 #211108;
+}
+
+.stones {
+    position: absolute;
+    bottom: -5px;
+    right: -10px;
+    display: flex;
+    align-items: flex-end;
+}
+
+.stone {
+    background-color: #92a1b9;
+    box-shadow: inset -2px -2px 0 #617088, 0 0 0 2px #211108;
+}
+.stone1 { width: 14px; height: 10px; margin-right: -4px; z-index: 2;}
+.stone2 { width: 22px; height: 16px; }
+
+/* Clouds */
+.clouds {
+    position: absolute;
+    top: 50px;
+    left: 100px;
+    width: 60px;
+    height: 20px;
+    background: #fff;
+    opacity: 0.6;
+    border-radius: 20px;
+    box-shadow: 
+        40px 10px 0 10px #fff,
+        80px -5px 0 5px #fff,
+        450px 20px 0 15px #fff,
+        500px 30px 0 5px #fff;
+}
