@@ -117,8 +117,12 @@ body {
     text-decoration: none;
     color: #fb9e31; /* Orange text */
     text-shadow: 2px 2px 0px #211108, -2px -2px 0px #211108, 2px -2px 0px #211108, -2px 2px 0px #211108; /* Black outline */
-    font-size: 16px;
-    height: 50px;
+    font-size: 13px;
+    min-height: 50px;
+    height: auto;
+    padding: 10px;
+    line-height: 1.5;
+    text-align: center;
     width: 250px;
     background-color: #d3996f;
     border: none;

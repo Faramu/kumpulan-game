@@ -60,11 +60,26 @@
         </div>
     </div>
     <script>
+        const stageLevels = [
+            ['Eksplorasi', 'Tebing Kabut', 'Garis Bilangan'],
+            ['Pengenalan Pasar', 'Hitung Penjual Buah', 'Evaluasi Pasar'],
+            ['Pengatur Suhu', 'Suhu Lanjutan', 'Suhu Campuran'],
+            ['Pemecah Dinding', 'Soal Obor', 'Energi Penghancur'],
+            ['Konsep FPB', 'Pohon Faktor', 'Benteng Utama'],
+            ['Gembok Gerbang', 'Tembus Perisai', 'Final Boss']
+        ];
+
         function showStage(stageNum) {
             document.getElementById('stage-menu').style.display = 'none';
             document.getElementById('level-menu').style.display = 'flex';
             
             document.getElementById('stage-title').innerText = 'STAGE ' + stageNum;
+            
+            // Set nama level sesuai stage
+            let levelNames = stageLevels[stageNum - 1];
+            document.getElementById('lvl-1-btn').innerText = levelNames[0];
+            document.getElementById('lvl-2-btn').innerText = levelNames[1];
+            document.getElementById('lvl-3-btn').innerText = levelNames[2];
             
             // Rumus: Folder Level dimulai dari = (Stage - 1) * 3 + 1
             let startFolderIndex = (stageNum - 1) * 3 + 1;
